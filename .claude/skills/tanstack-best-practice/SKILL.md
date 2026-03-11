@@ -14,6 +14,8 @@ description: Enforce TanStack frontend best practices when writing React/TypeScr
 - Strict TypeScript (no `any`)
 - Reusability-first design
 - Single responsibility per file
+- Always use kebab-case for file and folder names
+- High cohesion and low coupling
 
 ## API Layer Pattern
 
@@ -104,11 +106,11 @@ src/components/
 
 | Type | Location | Naming |
 |------|----------|--------|
-| API module | `src/apis/{feature}/` | lowercase |
-| UI component | `src/components/ui/` | PascalCase.tsx |
-| Feature component | `src/components/features/` | PascalCase.tsx |
-| Route | `src/routes/` | file-based routing |
-| Lib config | `src/libs/{lib}/` | index.ts |
+| API module | `src/apis/{feature}/` | kebab-case |
+| UI component | `src/components/ui/` | kebab-case.tsx |
+| Feature component | `src/components/features/` | kebab-case.tsx |
+| Route | `src/routes/` | kebab-case (file-based routing) |
+| Lib config | `src/libs/{lib}/` | kebab-case/index.ts |
 
 ## Response Types
 ```typescript
@@ -124,3 +126,6 @@ type ListResponse<T> = { data: T[]; pagination: PaginationMeta }
 5. Keep components pure when possible
 6. Extract reusable logic to hooks
 7. Use Zod for all form validation
+8. Use kebab-case for all file and folder names (e.g. `user-profile.tsx`, `auth-guard.tsx`)
+9. High cohesion: group related logic together within modules
+10. Low coupling: minimize dependencies between modules, use clean interfaces
