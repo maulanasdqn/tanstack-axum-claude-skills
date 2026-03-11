@@ -54,6 +54,9 @@ Automatically applies when writing React/TypeScript code.
 - 2-space indentation
 - Strict TypeScript (no `any`)
 - Max 200 lines per file
+- kebab-case for all file and folder names
+- Prefix `T` for types, `I` for interfaces, `E` for enums (e.g. `TUser`, `IUserData`, `EUserGender`)
+- High cohesion and low coupling
 
 ### Axum Best Practice
 
@@ -101,6 +104,8 @@ Both skills enforce:
 - **Type Safety** - Strict typing throughout
 - **Max 200 LOC** - Keep files focused and readable
 - **No Comments** - Code should be self-documenting
+- **kebab-case** - All file and folder names use kebab-case
+- **High Cohesion, Low Coupling** - Related logic together, minimal cross-module dependencies
 
 ## Reference Projects
 
