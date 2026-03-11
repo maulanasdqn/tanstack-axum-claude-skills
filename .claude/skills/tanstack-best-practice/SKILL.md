@@ -12,6 +12,7 @@ description: Enforce TanStack frontend best practices when writing React/TypeScr
 - Single quotes
 - 2-space indentation
 - Strict TypeScript (no `any`)
+- Prefix `T` for types (e.g. `TUserItems`), `I` for interfaces (e.g. `IUserData`), `E` for enums (e.g. `EUserGender`)
 - Reusability-first design
 - Single responsibility per file
 - Always use kebab-case for file and folder names
@@ -23,13 +24,13 @@ Every feature API must follow this 4-file structure in `src/apis/{feature}/`:
 
 ### types.ts
 ```typescript
-export type User = {
+export type TUser = {
   id: string
   email: string
   created_at: string
 }
 
-export type CreateUserPayload = {
+export type TCreateUserPayload = {
   email: string
   password: string
 }
@@ -38,17 +39,17 @@ export type CreateUserPayload = {
 ### service.ts
 ```typescript
 import { apiClient } from '@/libs/axios'
-import type { User, CreateUserPayload } from './types'
+import type { TUser, TCreateUserPayload } from './types'
 
 const BASE = '/api/v1/users'
 
 export const usersService = {
-  list: (params?: ListParams) =>
-    apiClient.get<ListResponse<User>>(BASE, { params }),
+  list: (params?: TListParams) =>
+    apiClient.get<TListResponse<TUser>>(BASE, { params }),
   get: (id: string) =>
-    apiClient.get<SingleResponse<User>>(`${BASE}/${id}`),
-  create: (payload: CreateUserPayload) =>
-    apiClient.post<SingleResponse<User>>(BASE, payload),
+    apiClient.get<TSingleResponse<TUser>>(`${BASE}/${id}`),
+  create: (payload: TCreateUserPayload) =>
+    apiClient.post<TSingleResponse<TUser>>(BASE, payload),
 }
 ```
 
@@ -114,8 +115,8 @@ src/components/
 
 ## Response Types
 ```typescript
-type SingleResponse<T> = { data: T; message: string }
-type ListResponse<T> = { data: T[]; pagination: PaginationMeta }
+type TSingleResponse<T> = { data: T; message: string }
+type TListResponse<T> = { data: T[]; pagination: TPaginationMeta }
 ```
 
 ## Rules
@@ -129,3 +130,4 @@ type ListResponse<T> = { data: T[]; pagination: PaginationMeta }
 8. Use kebab-case for all file and folder names (e.g. `user-profile.tsx`, `auth-guard.tsx`)
 9. High cohesion: group related logic together within modules
 10. Low coupling: minimize dependencies between modules, use clean interfaces
+11. Prefix `T` for types, `I` for interfaces, `E` for enums (e.g. `TUserItems`, `IUserData`, `EUserGender`)
